@@ -3,8 +3,6 @@ package com.mygdx.mechanictests.ship;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
-import java.util.HashMap;
-
 public class ShipInputProcessor implements InputProcessor {
     boolean left, right, up, down;
 
