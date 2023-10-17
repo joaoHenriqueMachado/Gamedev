@@ -10,7 +10,7 @@ public class Ship extends Sprite {
     ShipInputProcessor shipInputProcessor;
     static int maneuverSpeed = 16;
     public Ship(){
-        super(MechanicTests.manager.<Texture>get("ship.png"));
+        super(MechanicTests.manager.<Texture>get("spaceship.png"));
         shipInputProcessor = new ShipInputProcessor();
         MechanicTests.addInputProcessor(shipInputProcessor);
     }

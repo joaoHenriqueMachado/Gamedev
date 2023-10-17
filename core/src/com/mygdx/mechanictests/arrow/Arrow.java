@@ -8,7 +8,7 @@ import com.mygdx.mechanictests.MechanicTests;
 public class Arrow extends Sprite {
 
     public Arrow(){
-        super((Texture) MechanicTests.manager.get("arrow.png"));
+        super((Texture) MechanicTests.manager.get("spaceship.png"));
     }
 
     public void update(float delta){
