@@ -3,7 +3,9 @@ package com.mygdx.mechanictests;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.mechanictests.projectile.ProjectileController;
 
 public class MechanicTests extends Game {
 	GameScreen gameScreen;
@@ -23,14 +25,18 @@ public class MechanicTests extends Game {
 		manager.load("spaceship.png", Texture.class);
 		manager.load("spaceship_left.png", Texture.class);
 		manager.load("spaceship_right.png", Texture.class);
+		manager.load("projectile.png", Texture.class);
 		manager.load("sounds/wavetable.mp3", Music.class);
+		manager.load("sounds/laser_gun.mp3", Sound.class);
 
 		manager.finishLoading();
 		defaultMusic = manager.get("sounds/wavetable.mp3");
 		defaultMusic.setLooping(true);
-		defaultMusic.setVolume(0.05f);
+		defaultMusic.setVolume(0.02f);
 		defaultMusic.play();
+
 		gameScreen = new GameScreen();
+		ProjectileController.init();
 		setScreen(gameScreen);
 	}
 

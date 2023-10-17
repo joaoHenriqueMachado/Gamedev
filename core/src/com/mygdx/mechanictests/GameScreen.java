@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.mechanictests.projectile.ProjectileController;
 import com.mygdx.mechanictests.ship.Ship;
 
 public class GameScreen implements Screen {
@@ -23,8 +24,8 @@ public class GameScreen implements Screen {
     final private float[] backgroundOffsets = {0,0,0,0};
     final private float backgroundMaxScrollingSpeed;
 
-    private final int WORLD_WIDTH = 640;
-    private final int WORLD_HEIGHT = 480;
+    public static int WORLD_WIDTH = 1920;
+    public static int WORLD_HEIGHT = 1080;
 
     public static Ship ship;
 
@@ -45,10 +46,10 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-
         batch.begin();
         renderBackground(delta);
         ship.draw(batch, Gdx.graphics.getDeltaTime());
+        ProjectileController.draw(batch, Gdx.graphics.getDeltaTime());
         batch.end();
     }
     private void renderBackground(float deltaTime){
