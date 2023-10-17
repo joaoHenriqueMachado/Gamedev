@@ -8,8 +8,6 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		//config.height = 360;
-		//config.width = 360;
 		config.setTitle("MechanicTests");
 		new Lwjgl3Application(new MechanicTests(), config);
 	}

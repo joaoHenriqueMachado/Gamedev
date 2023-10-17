@@ -1,52 +1,54 @@
 package com.mygdx.mechanictests;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.mechanictests.arrow.Arrow;
+import com.mygdx.mechanictests.ship.Ship;
 
 public class GameScreen implements Screen {
     // screen
-    private Camera camera;
-    private Viewport viewport;
+    final private Camera camera;
+    final private Viewport viewport;
 
     // graphics
-    private SpriteBatch batch;
-    private Texture[] backgrounds;
+    final private SpriteBatch batch;
+    final private Texture[] backgrounds;
 
     // timing
-    private float[] backgroundOffsets = {0,0,0,0};
-    private float backgroundMaxScrollingSpeed;
+    final private float[] backgroundOffsets = {0,0,0,0};
+    final private float backgroundMaxScrollingSpeed;
 
-    private final int WORLD_WIDTH = 72;
-    private final int WORLD_HEIGHT = 128;
+    private final int WORLD_WIDTH = 640;
+    private final int WORLD_HEIGHT = 480;
 
-    GameScreen() {
+    public static Ship ship;
+
+    public GameScreen() {
         camera = new OrthographicCamera();
         viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         backgrounds = new Texture[4];
-        //backgroundOffset = 0;
 
         backgrounds[0] = new Texture("Starscape00.png");
         backgrounds[1] = new Texture("Starscape01.png");
-        backgrounds[2] = new Texture("Starscape02.png");
+        backgrounds[2] = new Texture("Starscape01.png");
         backgrounds[3] = new Texture("Starscape03.png");
 
-        backgroundMaxScrollingSpeed = (float)(WORLD_HEIGHT) / 4;
+        backgroundMaxScrollingSpeed = (float)(WORLD_HEIGHT) / 16;
         batch = new SpriteBatch();
+        ship = new Ship();
     }
 
     @Override
     public void render(float delta) {
+
         batch.begin();
-
         renderBackground(delta);
-
+        ship.draw(batch, Gdx.graphics.getDeltaTime());
         batch.end();
     }
     private void renderBackground(float deltaTime){
