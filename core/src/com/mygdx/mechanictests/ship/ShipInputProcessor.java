@@ -3,29 +3,39 @@ package com.mygdx.mechanictests.ship;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
-import java.util.HashMap;
-
 public class ShipInputProcessor implements InputProcessor {
-    boolean left, right;
+    boolean left, right, up, down;
 
     @Override
     public boolean keyDown(int keycode) {
-        if(keycode == Input.Keys.A){
+        if (keycode == Input.Keys.A) {
             left = true;
         }
-        if(keycode == Input.Keys.D){
+        if (keycode == Input.Keys.D) {
             right = true;
+        }
+        if (keycode == Input.Keys.W) {
+            up = true;
+        }
+        if (keycode == Input.Keys.S) {
+            down = true;
         }
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        if(keycode == Input.Keys.A){
+        if (keycode == Input.Keys.A) {
             left = false;
         }
-        if(keycode == Input.Keys.D){
+        if (keycode == Input.Keys.D) {
             right = false;
+        }
+        if (keycode == Input.Keys.W) {
+            up = false;
+        }
+        if (keycode == Input.Keys.S) {
+            down = false;
         }
         return false;
     }
