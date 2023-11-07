@@ -24,8 +24,8 @@ public class GameScreen implements Screen {
     final private float[] backgroundOffsets = {0,0,0,0};
     final private float backgroundMaxScrollingSpeed;
 
-    public static int WORLD_WIDTH = 1920;
-    public static int WORLD_HEIGHT = 1080;
+    public static int WORLD_WIDTH = 3840;
+    public static int WORLD_HEIGHT = 2160;
 
     public static Ship ship;
 
