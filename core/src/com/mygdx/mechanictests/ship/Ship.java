@@ -52,6 +52,10 @@ public class Ship extends Sprite {
             velocityX *= stopFriction;
         }
 
+        updateShipPosition(delta);
+    }
+
+    private void updateShipPosition(float delta){
         float updatedYPosition = this.getY() + velocityY * delta;
         if(updatedYPosition > 0 && updatedYPosition < GameScreen.WORLD_HEIGHT - this.getHeight()){
             this.setY(this.getY() + velocityY * delta);
@@ -59,13 +63,11 @@ public class Ship extends Sprite {
             velocityY = 0;
         }
 
-
         float updatedXPosition = this.getX() + velocityX * delta;
         if(updatedXPosition > 0 && updatedXPosition < GameScreen.WORLD_WIDTH - this.getWidth()){
             this.setX(this.getX() + velocityX * delta);
         }else{
             velocityX = 0;
         }
-
     }
 }

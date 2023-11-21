@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.mechanictests.enemy.EnemyController;
 import com.mygdx.mechanictests.projectile.ProjectileController;
 import com.mygdx.mechanictests.ship.Ship;
 
@@ -29,6 +30,9 @@ public class GameScreen implements Screen {
 
     public static Ship ship;
 
+    public static int score;
+
+    public static int counter;
     public GameScreen() {
         camera = new OrthographicCamera();
         viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
@@ -42,15 +46,24 @@ public class GameScreen implements Screen {
         backgroundMaxScrollingSpeed = (float)(WORLD_HEIGHT) / 16;
         batch = new SpriteBatch();
         ship = new Ship();
+        ProjectileController.init();
+        EnemyController.init();
+        counter = 0;
     }
 
     @Override
     public void render(float delta) {
         batch.begin();
         renderBackground(delta);
-        ship.draw(batch, Gdx.graphics.getDeltaTime());
-        ProjectileController.draw(batch, Gdx.graphics.getDeltaTime());
+        ship.draw(batch, delta);
+        ProjectileController.draw(batch, delta);
+        EnemyController.draw(batch, delta);
         batch.end();
+        if(counter >= 20){
+            EnemyController.set((float)GameScreen.WORLD_WIDTH/2, GameScreen.WORLD_HEIGHT);
+            counter = 0;
+        }
+        counter++;
     }
     private void renderBackground(float deltaTime){
         backgroundOffsets[0] += deltaTime*backgroundMaxScrollingSpeed/8;

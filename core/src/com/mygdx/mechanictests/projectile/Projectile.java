@@ -6,14 +6,14 @@ import com.mygdx.mechanictests.GameScreen;
 import com.mygdx.mechanictests.MechanicTests;
 
 public class Projectile extends Sprite {
+    int projectileVelocity = 600;
 
     public Projectile(){
         super((Texture) MechanicTests.manager.get("projectile.png"));
     }
 
     public void update(float delta){
-        int projectileVelocity = 600;
-        this.setY(this.getY() + projectileVelocity *delta);
+        this.setY(this.getY() + this.projectileVelocity * delta);
     }
 
     public boolean isOutOfScreen(){

@@ -23,11 +23,13 @@ public class MechanicTests extends Game {
 	public void create () {
 		manager = new AssetManager();
 		manager.load("spaceship.png", Texture.class);
+		manager.load("new_spaceship.png", Texture.class);
 		manager.load("spaceship_left.png", Texture.class);
 		manager.load("spaceship_right.png", Texture.class);
 		manager.load("projectile.png", Texture.class);
 		manager.load("sounds/wavetable.mp3", Music.class);
 		manager.load("sounds/laser_gun.mp3", Sound.class);
+		//manager.load("sounds/explosion_sound.mp3", Sound.class);
 
 		manager.finishLoading();
 		defaultMusic = manager.get("sounds/wavetable.mp3");
@@ -35,8 +37,9 @@ public class MechanicTests extends Game {
 		defaultMusic.setVolume(0.02f);
 		defaultMusic.play();
 
+		Gdx.graphics.setWindowedMode(1024, 720);
+
 		gameScreen = new GameScreen();
-		ProjectileController.init();
 		setScreen(gameScreen);
 	}
 
