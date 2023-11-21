@@ -1,11 +1,16 @@
 package com.mygdx.mechanictests.projectile;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.mygdx.mechanictests.GameScreen;
 
 public class ProjectileInputProcessor implements InputProcessor {
+    public boolean projectileType;
     @Override
     public boolean keyDown(int keycode) {
+        if(keycode == Input.Keys.NUM_1){
+            projectileType = !projectileType;
+        }
         return false;
     }
 
@@ -22,8 +27,13 @@ public class ProjectileInputProcessor implements InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         ProjectileController.shot.play();
-        ProjectileController.set(GameScreen.ship.getX() + GameScreen.ship.getWidth() / 2 - 16, GameScreen.ship.getY() + GameScreen.ship.getHeight());
-        ProjectileController.set(GameScreen.ship.getX() + GameScreen.ship.getWidth() / 4 - 16, GameScreen.ship.getY() + GameScreen.ship.getHeight());
+        if(projectileType){
+            ProjectileController.set(GameScreen.ship.getX() + GameScreen.ship.getWidth() / 2 - 48, GameScreen.ship.getY() + GameScreen.ship.getHeight());
+        }else{
+            ProjectileController.set(GameScreen.ship.getX() + GameScreen.ship.getWidth() / 2 - 16, GameScreen.ship.getY() + GameScreen.ship.getHeight());
+            ProjectileController.set(GameScreen.ship.getX() + GameScreen.ship.getWidth() / 4 - 16, GameScreen.ship.getY() + GameScreen.ship.getHeight());
+        }
+
         return false;
     }
 

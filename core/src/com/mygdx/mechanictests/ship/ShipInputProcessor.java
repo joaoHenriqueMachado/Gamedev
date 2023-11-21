@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 
 public class ShipInputProcessor implements InputProcessor {
     boolean left, right, up, down;
+    boolean projectileType;
 
     @Override
     public boolean keyDown(int keycode) {
