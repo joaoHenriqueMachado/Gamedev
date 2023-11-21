@@ -3,7 +3,6 @@ package com.mygdx.mechanictests.enemy;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.mechanictests.GameScreen;
-import com.mygdx.mechanictests.MechanicTests;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -11,11 +10,11 @@ public class EnemyController {
     private static ConcurrentLinkedQueue<Enemy> aliveEnemies;
     private static ConcurrentLinkedQueue<Enemy> deadEnemies;
 
-    private static Sound explosionSound;
+    //private static Sound explosionSound;
 
     public static void init(){
-        aliveEnemies = new ConcurrentLinkedQueue<Enemy>();
-        deadEnemies = new ConcurrentLinkedQueue<Enemy>();
+        aliveEnemies = new ConcurrentLinkedQueue<>();
+        deadEnemies = new ConcurrentLinkedQueue<>();
         //explosionSound = MechanicTests.manager.get("sounds/explosion_sound.mp3");
     }
 

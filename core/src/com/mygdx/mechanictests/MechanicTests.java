@@ -5,7 +5,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.mechanictests.projectile.ProjectileController;
 
 public class MechanicTests extends Game {
 	GameScreen gameScreen;
