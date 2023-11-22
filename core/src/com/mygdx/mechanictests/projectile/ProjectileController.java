@@ -45,7 +45,7 @@ public abstract class ProjectileController {
             if (!secondaryDeadProjectiles.isEmpty()){
                 a = secondaryDeadProjectiles.remove();
             }else{
-                a = new Projectile();
+                a = new Projectile("laser_ball.png");
             }
             secondaryAliveProjectiles.add(a);
             long id = shot.play();
@@ -56,7 +56,7 @@ public abstract class ProjectileController {
                 a = deadProjectiles.remove();
                 a.setHit(false);
             }else{
-                a = new Projectile("projectile.png");
+                a = new Projectile();
             }
             aliveProjectiles.add(a);
             long id = shot.play();

@@ -28,7 +28,7 @@ public class ProjectileInputProcessor implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         ProjectileController.shot.play();
         if(projectileType){
-            ProjectileController.set(GameScreen.ship.getX() + GameScreen.ship.getWidth() / 2 - 48, GameScreen.ship.getY() + GameScreen.ship.getHeight());
+            ProjectileController.set(GameScreen.ship.getX() + GameScreen.ship.getWidth() / 2 - 98, GameScreen.ship.getY() + GameScreen.ship.getHeight());
         }else{
             ProjectileController.set(GameScreen.ship.getX() + GameScreen.ship.getWidth() / 2 - 16, GameScreen.ship.getY() + GameScreen.ship.getHeight());
             ProjectileController.set(GameScreen.ship.getX() + GameScreen.ship.getWidth() / 4 - 16, GameScreen.ship.getY() + GameScreen.ship.getHeight());
