@@ -3,6 +3,7 @@ package com.mygdx.mechanictests.enemy;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.mechanictests.GameScreen;
+import com.mygdx.mechanictests.paths.Paths;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -23,11 +24,12 @@ public class EnemyController {
         if(!deadEnemies.isEmpty()){
             a = deadEnemies.remove();
         }else{
-            a = new Enemy("");
+            a = new Enemy("", Paths.sine);
         }
-        aliveEnemies.add(a);
         a.setX(x);
-        a.setY(y + a.getHeight());
+        a.setY(y);
+        a.setCurrent(0);
+        aliveEnemies.add(a);
     }
 
     public static void draw(SpriteBatch batch, float delta){

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.mechanictests.enemy.EnemyController;
+import com.mygdx.mechanictests.paths.Paths;
 import com.mygdx.mechanictests.projectile.ProjectileController;
 import com.mygdx.mechanictests.ship.Ship;
 
@@ -48,6 +49,7 @@ public class GameScreen implements Screen {
         ship = new Ship();
         ProjectileController.init();
         EnemyController.init();
+        Paths.init();
         counter = 0;
     }
 
