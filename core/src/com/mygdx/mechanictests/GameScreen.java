@@ -1,5 +1,6 @@
 package com.mygdx.mechanictests;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -63,6 +64,7 @@ public class GameScreen implements Screen {
             counter = 0;
         }
         counter++;
+        Gdx.graphics.setTitle("MechanicTests | Score: " + score);
     }
     private void renderBackground(float deltaTime){
         backgroundOffsets[0] += deltaTime*backgroundMaxScrollingSpeed/8;

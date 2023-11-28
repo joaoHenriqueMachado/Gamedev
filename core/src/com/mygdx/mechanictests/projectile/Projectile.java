@@ -7,9 +7,18 @@ import com.mygdx.mechanictests.MechanicTests;
 
 public class Projectile extends Sprite {
     int projectileVelocity = 600;
+    public boolean hit;
+
+    public void setHit(boolean hit) {
+        this.hit = hit;
+    }
 
     public Projectile(){
         super((Texture) MechanicTests.manager.get("projectile.png"));
+    }
+
+    public Projectile(String texture){
+        super((Texture) MechanicTests.manager.get(texture));
     }
 
     public void update(float delta){

@@ -28,6 +28,11 @@ public class Ship extends Sprite {
     }
 
     public void update(float delta) {
+        updateShipVelocity(delta);
+        updateShipPosition(delta);
+    }
+
+    private void updateShipVelocity(float delta){
         if (shipInputProcessor.left) {
             this.setRegion(MechanicTests.manager.<Texture>get("spaceship_left.png"));
             velocityX -= accelerationX * delta;
@@ -51,8 +56,6 @@ public class Ship extends Sprite {
         if (!shipInputProcessor.left && !shipInputProcessor.right) {
             velocityX *= stopFriction;
         }
-
-        updateShipPosition(delta);
     }
 
     private void updateShipPosition(float delta){

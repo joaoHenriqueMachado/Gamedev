@@ -6,6 +6,7 @@ import com.mygdx.mechanictests.GameScreen;
 import com.mygdx.mechanictests.MechanicTests;
 import com.mygdx.mechanictests.projectile.Projectile;
 import com.mygdx.mechanictests.projectile.ProjectileController;
+import com.mygdx.mechanictests.projectile.ProjectileInputProcessor;
 
 public class Enemy extends Sprite {
     int speed = -500;
@@ -21,6 +22,12 @@ public class Enemy extends Sprite {
     public boolean detectHit(){
         for(Projectile p: ProjectileController.getAliveProjectiles()){
             if(this.getBoundingRectangle().overlaps(p.getBoundingRectangle())){
+                p.setHit(true);
+                return true;
+            }
+        }
+        for(Projectile p: ProjectileController.getSecondaryAliveProjectiles()){
+            if(this.getBoundingRectangle().overlaps(p.getBoundingRectangle())){
                 return true;
             }
         }
@@ -30,9 +37,6 @@ public class Enemy extends Sprite {
     public boolean isOutOfScreen(){
         boolean outsideYAxis = this.getY() < -this.getHeight();
         boolean outsideXAxis = this.getX() > GameScreen.WORLD_WIDTH || this.getX() < 0;
-        if(outsideXAxis || outsideYAxis){
-            System.out.println("Removed enemy at " + this.getBoundingRectangle());
-        }
         return outsideYAxis || outsideXAxis;
     }
 }
