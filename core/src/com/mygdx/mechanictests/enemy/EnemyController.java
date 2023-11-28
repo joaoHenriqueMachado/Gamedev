@@ -1,6 +1,5 @@
 package com.mygdx.mechanictests.enemy;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.mechanictests.GameScreen;
 import com.mygdx.mechanictests.paths.Paths;

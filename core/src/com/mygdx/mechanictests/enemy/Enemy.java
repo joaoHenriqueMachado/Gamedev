@@ -6,17 +6,15 @@ import com.badlogic.gdx.math.Bezier;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.mechanictests.GameScreen;
 import com.mygdx.mechanictests.MechanicTests;
-import com.mygdx.mechanictests.paths.Paths;
 import com.mygdx.mechanictests.projectile.Projectile;
 import com.mygdx.mechanictests.projectile.ProjectileController;
 
 public class Enemy extends Sprite {
-    private final float speed = 0.25f;
     private float current;
     private final Vector2 currentPosition;
     private final Vector2 currentAngle;
 
-    private Bezier<Vector2> path;
+    private final Bezier<Vector2> path;
 
     public void setCurrent(float current) {
         this.current = current;
@@ -32,6 +30,7 @@ public class Enemy extends Sprite {
     }
 
     public void update(float delta) {
+        float speed = 0.25f;
         current += speed * delta;
 
         this.getBoundingRectangle().getPosition(currentPosition);
