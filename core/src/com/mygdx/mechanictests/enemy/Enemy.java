@@ -11,7 +11,9 @@ import com.mygdx.mechanictests.projectile.ProjectileController;
 
 public class Enemy extends Sprite {
     private float current;
-    private final Vector2 currentPosition;
+
+    public Vector2 initialPosition;
+    public Vector2 currentPosition;
     private final Vector2 currentAngle;
 
     private final Bezier<Vector2> path;
@@ -28,6 +30,14 @@ public class Enemy extends Sprite {
         this.offsetX = offsetX;
     }
 
+    public void setInitialPosition(float x, float y) {
+        this.initialPosition.set(x,y);
+    }
+
+    public void setCurrentPosition(Vector2 currentPosition) {
+        this.currentPosition = currentPosition;
+    }
+
     public void setOffsetY(int offsetY) {
         this.offsetY = offsetY;
     }
@@ -35,6 +45,7 @@ public class Enemy extends Sprite {
     public Enemy(String enemyType, Bezier<Vector2> path) {
         super((Texture) MechanicTests.manager.get("new_spaceship.png"));
         this.flip(true, true);
+        initialPosition = new Vector2();
         currentPosition = new Vector2();
         currentAngle = new Vector2();
         current = 0;

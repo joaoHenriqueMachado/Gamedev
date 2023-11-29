@@ -49,6 +49,7 @@ public class GameScreen implements Screen {
         ship = new Ship();
         ProjectileController.init();
         EnemyController.init();
+        EnemyController.generateWave(10);
         Paths.init();
         counter = 0;
     }
@@ -60,12 +61,8 @@ public class GameScreen implements Screen {
         ship.draw(batch, delta);
         ProjectileController.draw(batch, delta);
         EnemyController.draw(batch, delta);
+        EnemyController.spawnEnemies(delta);
         batch.end();
-        if(counter >= 20){
-            EnemyController.set((float)GameScreen.WORLD_WIDTH/2, GameScreen.WORLD_HEIGHT);
-            counter = 0;
-        }
-        counter++;
         Gdx.graphics.setTitle("MechanicTests | Score: " + score);
     }
     private void renderBackground(float deltaTime){
