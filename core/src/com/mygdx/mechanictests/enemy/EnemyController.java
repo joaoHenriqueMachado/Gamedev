@@ -23,7 +23,7 @@ public class EnemyController {
         if(!deadEnemies.isEmpty()){
             a = deadEnemies.remove();
         }else{
-            a = new Enemy("", Paths.sine);
+            a = new Enemy("", Paths.xLine);
         }
         a.setX(x);
         a.setY(y);

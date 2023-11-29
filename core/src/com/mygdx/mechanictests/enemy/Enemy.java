@@ -16,8 +16,20 @@ public class Enemy extends Sprite {
 
     private final Bezier<Vector2> path;
 
+    private int offsetX;
+    private int offsetY;
+
+
     public void setCurrent(float current) {
         this.current = current;
+    }
+
+    public void setOffsetX(int offsetX) {
+        this.offsetX = offsetX;
+    }
+
+    public void setOffsetY(int offsetY) {
+        this.offsetY = offsetY;
     }
 
     public Enemy(String enemyType, Bezier<Vector2> path) {
@@ -26,6 +38,8 @@ public class Enemy extends Sprite {
         currentPosition = new Vector2();
         currentAngle = new Vector2();
         current = 0;
+        offsetX = 0;
+        offsetY = 0;
         this.path = path;
     }
 
@@ -36,8 +50,8 @@ public class Enemy extends Sprite {
         this.getBoundingRectangle().getPosition(currentPosition);
         path.valueAt(currentPosition, current);
         path.derivativeAt(currentAngle, current);
-        this.setX(currentPosition.x);
-        this.setY(currentPosition.y);
+        this.setX(currentPosition.x + offsetX);
+        this.setY(currentPosition.y + offsetY);
         this.setRotation(currentAngle.angleDeg() + 90);
         //System.out.println(currentPosition.x + "    " + currentPosition.y);
     }
