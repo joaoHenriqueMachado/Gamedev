@@ -1,8 +1,10 @@
 package com.mygdx.mechanictests.enemy;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Bezier;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.mechanictests.GameScreen;
+import com.mygdx.mechanictests.paths.Paths;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -12,22 +14,61 @@ public class EnemyController {
 
     //private static Sound explosionSound;
 
+    private static float waveCounter;
+    private static int waveEnemyCount;
+
+    private static int initialWaveEnemyCount;
+    private static int enemiesAlive;
+
+    public static void killEnemy(){
+        if(enemiesAlive > 1){
+            enemiesAlive--;
+        }else{
+            reGenerateWave();
+        }
+    }
+
+    public static void generateWave(int enemyCount){
+        waveEnemyCount = enemyCount;
+        enemiesAlive = enemyCount;
+        initialWaveEnemyCount = enemyCount;
+    }
+
+    public static void reGenerateWave(){
+        waveEnemyCount = initialWaveEnemyCount;
+        enemiesAlive = initialWaveEnemyCount;
+    }
+
+    public static void spawnEnemies(float delta){
+        waveCounter += delta;
+        if(waveCounter >= 0.25f){
+            if(waveEnemyCount > 0){
+                EnemyController.set((float)GameScreen.WORLD_WIDTH/2, GameScreen.WORLD_HEIGHT, Paths.sine);
+                waveEnemyCount--;
+            }
+            waveCounter -= 0.25f;
+        }
+    }
+
     public static void init(){
         aliveEnemies = new ConcurrentLinkedQueue<>();
         deadEnemies = new ConcurrentLinkedQueue<>();
+        waveCounter = 0;
         //explosionSound = MechanicTests.manager.get("sounds/explosion_sound.mp3");
     }
 
-    public static void set(float x, float y){
+    public static void set(float x, float y, Bezier<Vector2> path){
         Enemy a;
         if(!deadEnemies.isEmpty()){
             a = deadEnemies.remove();
         }else{
-            a = new Enemy("");
+            a = new Enemy("", path);
         }
-        aliveEnemies.add(a);
         a.setX(x);
-        a.setY(y + a.getHeight());
+        a.setY(y);
+        a.setCurrent(0);
+        a.setInitialPosition(x,y);
+        aliveEnemies.add(a);
     }
 
     public static void draw(SpriteBatch batch, float delta){
@@ -37,9 +78,10 @@ public class EnemyController {
 
             if(e.detectHit()){
                 enemyHit(e);
+                killEnemy();
             }else if(e.isOutOfScreen()){
-                aliveEnemies.remove(e);
-                deadEnemies.add(e);
+                e.setCurrentPosition(e.initialPosition);
+                e.setCurrent(0);
             }
         }
     }

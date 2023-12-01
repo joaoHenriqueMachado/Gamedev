@@ -2,21 +2,69 @@ package com.mygdx.mechanictests.enemy;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Bezier;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.mechanictests.GameScreen;
 import com.mygdx.mechanictests.MechanicTests;
 import com.mygdx.mechanictests.projectile.Projectile;
 import com.mygdx.mechanictests.projectile.ProjectileController;
-import com.mygdx.mechanictests.projectile.ProjectileInputProcessor;
 
 public class Enemy extends Sprite {
-    int speed = -500;
-    public Enemy(String enemyType) {
+    private float current;
+
+    public Vector2 initialPosition;
+    public Vector2 currentPosition;
+    private final Vector2 currentAngle;
+
+    private final Bezier<Vector2> path;
+
+    private int offsetX;
+    private int offsetY;
+
+
+    public void setCurrent(float current) {
+        this.current = current;
+    }
+
+    public void setOffsetX(int offsetX) {
+        this.offsetX = offsetX;
+    }
+
+    public void setInitialPosition(float x, float y) {
+        this.initialPosition.set(x,y);
+    }
+
+    public void setCurrentPosition(Vector2 currentPosition) {
+        this.currentPosition = currentPosition;
+    }
+
+    public void setOffsetY(int offsetY) {
+        this.offsetY = offsetY;
+    }
+
+    public Enemy(String enemyType, Bezier<Vector2> path) {
         super((Texture) MechanicTests.manager.get("new_spaceship.png"));
         this.flip(true, true);
+        initialPosition = new Vector2();
+        currentPosition = new Vector2();
+        currentAngle = new Vector2();
+        current = 0;
+        offsetX = 0;
+        offsetY = 0;
+        this.path = path;
     }
 
     public void update(float delta) {
-        this.setY(this.getY() + speed * delta);
+        float speed = 0.25f;
+        current += speed * delta;
+
+        this.getBoundingRectangle().getPosition(currentPosition);
+        path.valueAt(currentPosition, current);
+        path.derivativeAt(currentAngle, current);
+        this.setX(currentPosition.x + offsetX);
+        this.setY(currentPosition.y + offsetY);
+        this.setRotation(currentAngle.angleDeg() + 90);
+        //System.out.println(currentPosition.x + "    " + currentPosition.y);
     }
 
     public boolean detectHit(){
