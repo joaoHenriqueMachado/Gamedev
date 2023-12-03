@@ -50,11 +50,10 @@ public abstract class ProjectileController {
                 a = new Projectile("laser_sprites/57.png");
             }
             secondaryAliveProjectiles.add(a);
-            System.out.println("Laser cannon shot");
             long id = laser_shot.play();
             laser_shot.setPan(id, -1, 0.3f);
             laser_shot.setPitch(id, 2);
-            laser_shot.setVolume(id, 0.1f);
+            laser_shot.setVolume(id, 0.2f);
         }else{
             if (!deadProjectiles.isEmpty()){
                 a = deadProjectiles.remove();
@@ -66,7 +65,7 @@ public abstract class ProjectileController {
             long id = shot.play();
             shot.setPan(id, -1, 0.3f);
             shot.setPitch(id, 2);
-            shot.setVolume(id, 0.1f);
+            shot.setVolume(id, 0.2f);
         }
         a.setX(x);
         a.setY(y);
