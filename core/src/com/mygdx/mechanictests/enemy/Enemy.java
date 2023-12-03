@@ -65,7 +65,6 @@ public class Enemy extends Sprite {
         this.setX(currentPosition.x + offsetX);
         this.setY(currentPosition.y + offsetY);
         this.setRotation(currentAngle.angleDeg() + 90);
-        //System.out.println(currentPosition.x + "    " + currentPosition.y);
     }
 
     public boolean detectHit(){

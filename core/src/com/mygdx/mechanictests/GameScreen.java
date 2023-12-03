@@ -40,7 +40,7 @@ public class GameScreen implements Screen {
         backgrounds = new Texture[4];
 
 //        backgrounds[0] = new Texture("Starscape00.png");
-        backgrounds[0] = MechanicTests.manager.get("bg_1.png");
+        backgrounds[0] = MechanicTests.manager.get("bg_2.png");
         backgrounds[1] = new Texture("Starscape01.png");
         backgrounds[2] = new Texture("Starscape01.png");
         backgrounds[3] = new Texture("Starscape03.png");
