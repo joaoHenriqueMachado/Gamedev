@@ -30,8 +30,7 @@ public class ProjectileInputProcessor implements InputProcessor {
         if(projectileType){
             ProjectileController.set(GameScreen.ship.getX() + GameScreen.ship.getWidth() / 2 - 98, GameScreen.ship.getY() + GameScreen.ship.getHeight());
         }else{
-            ProjectileController.set(GameScreen.ship.getX() + GameScreen.ship.getWidth() / 2 - 16, GameScreen.ship.getY() + GameScreen.ship.getHeight());
-            ProjectileController.set(GameScreen.ship.getX() + GameScreen.ship.getWidth() / 4 - 16, GameScreen.ship.getY() + GameScreen.ship.getHeight());
+            ProjectileController.set(GameScreen.ship.getX() + GameScreen.ship.getWidth() / 2 - 40, GameScreen.ship.getY() + GameScreen.ship.getHeight());
         }
 
         return false;

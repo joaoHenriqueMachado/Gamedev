@@ -39,7 +39,8 @@ public class GameScreen implements Screen {
         viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         backgrounds = new Texture[4];
 
-        backgrounds[0] = new Texture("Starscape00.png");
+//        backgrounds[0] = new Texture("Starscape00.png");
+        backgrounds[0] = MechanicTests.manager.get("bg_1.png");
         backgrounds[1] = new Texture("Starscape01.png");
         backgrounds[2] = new Texture("Starscape01.png");
         backgrounds[3] = new Texture("Starscape03.png");
@@ -66,7 +67,7 @@ public class GameScreen implements Screen {
         Gdx.graphics.setTitle("MechanicTests | Score: " + score);
     }
     private void renderBackground(float deltaTime){
-        backgroundOffsets[0] += deltaTime*backgroundMaxScrollingSpeed/8;
+        backgroundOffsets[0] = 0;
         backgroundOffsets[1] += deltaTime*backgroundMaxScrollingSpeed/4;
         backgroundOffsets[2] += deltaTime*backgroundMaxScrollingSpeed/2;
         backgroundOffsets[3] += deltaTime*backgroundMaxScrollingSpeed;

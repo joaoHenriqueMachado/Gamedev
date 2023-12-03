@@ -2,6 +2,7 @@ package com.mygdx.mechanictests.enemy;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Bezier;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.mechanictests.GameScreen;
@@ -43,7 +44,7 @@ public class Enemy extends Sprite {
     }
 
     public Enemy(String enemyType, Bezier<Vector2> path) {
-        super((Texture) MechanicTests.manager.get("new_spaceship.png"));
+        super(MechanicTests.shipTextureRegion[2][0]);
         this.flip(true, true);
         initialPosition = new Vector2();
         currentPosition = new Vector2();
@@ -55,7 +56,7 @@ public class Enemy extends Sprite {
     }
 
     public void update(float delta) {
-        float speed = 0.25f;
+        float speed = 0.30f;
         current += speed * delta;
 
         this.getBoundingRectangle().getPosition(currentPosition);
