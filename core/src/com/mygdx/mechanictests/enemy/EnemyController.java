@@ -1,9 +1,11 @@
 package com.mygdx.mechanictests.enemy;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Bezier;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.mechanictests.GameScreen;
+import com.mygdx.mechanictests.MechanicTests;
 import com.mygdx.mechanictests.paths.Paths;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -12,13 +14,15 @@ public class EnemyController {
     private static ConcurrentLinkedQueue<Enemy> aliveEnemies;
     private static ConcurrentLinkedQueue<Enemy> deadEnemies;
 
-    //private static Sound explosionSound;
+    private static Sound explosionSound;
 
     private static float waveCounter;
     private static int waveEnemyCount;
 
     private static int initialWaveEnemyCount;
     private static int enemiesAlive;
+
+    private static float spawnTime;
 
     public static void killEnemy(){
         if(enemiesAlive > 1){
@@ -41,12 +45,12 @@ public class EnemyController {
 
     public static void spawnEnemies(float delta){
         waveCounter += delta;
-        if(waveCounter >= 0.25f){
+        if(waveCounter >= spawnTime){
             if(waveEnemyCount > 0){
                 EnemyController.set((float)GameScreen.WORLD_WIDTH/2, GameScreen.WORLD_HEIGHT, Paths.sine);
                 waveEnemyCount--;
             }
-            waveCounter -= 0.25f;
+            waveCounter -= spawnTime;
         }
     }
 
@@ -54,7 +58,9 @@ public class EnemyController {
         aliveEnemies = new ConcurrentLinkedQueue<>();
         deadEnemies = new ConcurrentLinkedQueue<>();
         waveCounter = 0;
-        //explosionSound = MechanicTests.manager.get("sounds/explosion_sound.mp3");
+        spawnTime = 0.15f;
+        explosionSound = MechanicTests.manager.get("sounds/explosion_sound.wav");
+
     }
 
     public static void set(float x, float y, Bezier<Vector2> path){
@@ -90,6 +96,7 @@ public class EnemyController {
         GameScreen.score += 10;
         aliveEnemies.remove(e);
         deadEnemies.add(e);
-        //explosionSound.play();
+        long id = explosionSound.play();
+        explosionSound.setVolume(id, 0.1f);
     }
 }

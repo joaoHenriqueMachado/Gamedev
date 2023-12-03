@@ -31,20 +31,23 @@ public class MechanicTests extends Game {
 		manager.load("spaceship_left.png", Texture.class);
 		manager.load("spaceship_right.png", Texture.class);
 		manager.load("projectile.png", Texture.class);
+		manager.load("laser_sprites/02.png", Texture.class);
+		manager.load("laser_sprites/57.png", Texture.class);
 		manager.load("laser_ball.png", Texture.class);
 		manager.load("sounds/wavetable.mp3", Music.class);
 		manager.load("sounds/laser_gun.mp3", Sound.class);
 		manager.load("bg_1.png", Texture.class);
 		manager.load("bg_2.png", Texture.class);
-		//manager.load("sounds/explosion_sound.mp3", Sound.class);
+		manager.load("sounds/explosion_sound.wav", Sound.class);
+		manager.load("sounds/laser_shot.wav", Sound.class);
 
 		manager.finishLoading();
 		defaultMusic = manager.get("sounds/wavetable.mp3");
 		defaultMusic.setLooping(true);
-		defaultMusic.setVolume(0.02f);
+		defaultMusic.setVolume(0.05f);
 		defaultMusic.play();
 
-		Gdx.graphics.setWindowedMode(1024, 720);
+		Gdx.graphics.setWindowedMode(1600, 900);
 
 		gameScreen = new GameScreen();
 		setScreen(gameScreen);

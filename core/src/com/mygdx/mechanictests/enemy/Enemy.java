@@ -56,7 +56,7 @@ public class Enemy extends Sprite {
     }
 
     public void update(float delta) {
-        float speed = 0.30f;
+        float speed = 0.35f;
         current += speed * delta;
 
         this.getBoundingRectangle().getPosition(currentPosition);

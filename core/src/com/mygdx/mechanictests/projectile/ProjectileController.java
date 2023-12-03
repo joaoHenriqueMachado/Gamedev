@@ -13,6 +13,7 @@ public abstract class ProjectileController {
     private static ConcurrentLinkedQueue<Projectile> secondaryDeadProjectiles;
     public static ProjectileInputProcessor projectileInputProcessor;
     public static Sound shot;
+    public static Sound laser_shot;
     public static ConcurrentLinkedQueue<Projectile> getAliveProjectiles() {
         return aliveProjectiles;
     }
@@ -37,6 +38,7 @@ public abstract class ProjectileController {
         projectileInputProcessor = new ProjectileInputProcessor();
         MechanicTests.addInputProcessor(projectileInputProcessor);
         shot = MechanicTests.manager.get("sounds/laser_gun.mp3");
+        laser_shot = MechanicTests.manager.get("sounds/laser_shot.wav");
     }
 
     public static void set(float x, float y){
@@ -45,12 +47,14 @@ public abstract class ProjectileController {
             if (!secondaryDeadProjectiles.isEmpty()){
                 a = secondaryDeadProjectiles.remove();
             }else{
-                a = new Projectile("laser_ball.png");
+                a = new Projectile("laser_sprites/57.png");
             }
             secondaryAliveProjectiles.add(a);
-            long id = shot.play();
-            shot.setPan(id, -1, 0.3f);
-            shot.setPitch(id, 2);
+            System.out.println("Laser cannon shot");
+            long id = laser_shot.play();
+            laser_shot.setPan(id, -1, 0.3f);
+            laser_shot.setPitch(id, 2);
+            laser_shot.setVolume(id, 0.1f);
         }else{
             if (!deadProjectiles.isEmpty()){
                 a = deadProjectiles.remove();
@@ -62,6 +66,7 @@ public abstract class ProjectileController {
             long id = shot.play();
             shot.setPan(id, -1, 0.3f);
             shot.setPitch(id, 2);
+            shot.setVolume(id, 0.1f);
         }
         a.setX(x);
         a.setY(y);

@@ -14,11 +14,13 @@ public class Projectile extends Sprite {
     }
 
     public Projectile(){
-        super((Texture) MechanicTests.manager.get("projectile.png"));
+        super((Texture) MechanicTests.manager.get("laser_sprites/02.png"));
+        this.rotate90(false);
     }
 
     public Projectile(String texture){
         super((Texture) MechanicTests.manager.get(texture));
+        this.rotate90(false);
     }
 
     public void update(float delta){
