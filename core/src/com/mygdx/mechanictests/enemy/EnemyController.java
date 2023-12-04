@@ -8,6 +8,7 @@ import com.mygdx.mechanictests.GameScreen;
 import com.mygdx.mechanictests.MechanicTests;
 import com.mygdx.mechanictests.paths.Paths;
 
+import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class EnemyController {
@@ -23,6 +24,12 @@ public class EnemyController {
     private static int enemiesAlive;
 
     private static float spawnTime;
+
+    private static Bezier<Vector2> path;
+    private static Random random;
+
+    private static int offsetX;
+    private static int offsetY;
 
     public static void killEnemy(){
         if(enemiesAlive > 1){
@@ -41,13 +48,42 @@ public class EnemyController {
     public static void reGenerateWave(){
         waveEnemyCount = initialWaveEnemyCount;
         enemiesAlive = initialWaveEnemyCount;
+        int id = random.nextInt(5);
+        random = new Random();
+        switch(id){
+            case 0:
+                path = Paths.path1;
+                offsetY = 0;
+                offsetX = random.nextInt(-200, 200);
+                break;
+            case 1:
+                path = Paths.path2;
+                offsetY = 0;
+                offsetX = random.nextInt(-200, 200);
+                break;
+            case 2:
+                path = Paths.xLine;
+                offsetY = random.nextInt(-200, 200);
+                offsetX = 0;
+                break;
+            case 3:
+                path = Paths.yLine;
+                offsetY = 0;
+                offsetX = random.nextInt(-200, 200);
+                break;
+            case 4:
+                path = Paths.sine;
+                offsetY = 0;
+                offsetX = random.nextInt(-200, 200);
+                break;
+        }
     }
 
     public static void spawnEnemies(float delta){
         waveCounter += delta;
         if(waveCounter >= spawnTime){
             if(waveEnemyCount > 0){
-                EnemyController.set((float)GameScreen.WORLD_WIDTH/2, GameScreen.WORLD_HEIGHT, Paths.sine);
+                EnemyController.set((float)GameScreen.WORLD_WIDTH/2, GameScreen.WORLD_HEIGHT, path);
                 waveEnemyCount--;
             }
             waveCounter -= spawnTime;
@@ -57,6 +93,10 @@ public class EnemyController {
     public static void init(){
         aliveEnemies = new ConcurrentLinkedQueue<>();
         deadEnemies = new ConcurrentLinkedQueue<>();
+        random = new Random();
+        path = Paths.sine;
+        offsetX = 0;
+        offsetY = 0;
         waveCounter = 0;
         spawnTime = 0.15f;
         explosionSound = MechanicTests.manager.get("sounds/explosion_sound.wav");
@@ -74,6 +114,9 @@ public class EnemyController {
         a.setY(y);
         a.setCurrent(0);
         a.setInitialPosition(x,y);
+        a.setPath(path);
+        a.setOffsetX(offsetX);
+        a.setOffsetY(offsetY);
         aliveEnemies.add(a);
     }
 
@@ -94,6 +137,7 @@ public class EnemyController {
 
     private static void enemyHit(Enemy e){
         GameScreen.score += 10;
+        e.increaseSpeed(GameScreen.score);
         aliveEnemies.remove(e);
         deadEnemies.add(e);
         long id = explosionSound.play();

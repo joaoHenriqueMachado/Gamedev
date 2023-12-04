@@ -11,16 +11,18 @@ public abstract class Paths {
     public static Bezier<Vector2> sine;
 
     public static void init(){
-        Vector2[] path1Points = new Vector2[3];
+        Vector2[] path1Points = new Vector2[4];
         path1Points[0] = new Vector2((float)GameScreen.WORLD_WIDTH / 2, GameScreen.WORLD_HEIGHT);
-        path1Points[1] = new Vector2((float)GameScreen.WORLD_WIDTH / 2, (float)GameScreen.WORLD_HEIGHT / 2);
-        path1Points[2] = new Vector2((float)GameScreen.WORLD_WIDTH, (float)GameScreen.WORLD_HEIGHT / 4);
+        path1Points[1] = new Vector2((float)GameScreen.WORLD_WIDTH, (float)GameScreen.WORLD_HEIGHT / 2);
+        path1Points[2] = new Vector2((float)GameScreen.WORLD_WIDTH / 2, (float)GameScreen.WORLD_HEIGHT / 4);
+        path1Points[3] = new Vector2((float)GameScreen.WORLD_WIDTH / 2, 0);
         path1 = new Bezier<>(path1Points);
 
-        Vector2[] path2Points = new Vector2[3];
+        Vector2[] path2Points = new Vector2[4];
         path2Points[0] = new Vector2((float)GameScreen.WORLD_WIDTH / 2, GameScreen.WORLD_HEIGHT);
-        path2Points[1] = new Vector2((float)GameScreen.WORLD_WIDTH / 2, (float)GameScreen.WORLD_HEIGHT / 2);
-        path2Points[2] = new Vector2(0, (float)GameScreen.WORLD_HEIGHT / 4);
+        path2Points[1] = new Vector2(0, (float)GameScreen.WORLD_HEIGHT / 2);
+        path2Points[2] = new Vector2((float)GameScreen.WORLD_WIDTH / 2, (float)GameScreen.WORLD_HEIGHT / 4);
+        path2Points[3] = new Vector2((float)GameScreen.WORLD_WIDTH / 2, 0);
         path2 = new Bezier<>(path2Points);
 
         Vector2[] path3Points = new Vector2[2];

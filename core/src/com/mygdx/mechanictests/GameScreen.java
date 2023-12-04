@@ -39,7 +39,6 @@ public class GameScreen implements Screen {
         viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         backgrounds = new Texture[4];
 
-//        backgrounds[0] = new Texture("Starscape00.png");
         backgrounds[0] = MechanicTests.manager.get("bg_2.png");
         backgrounds[1] = new Texture("Starscape01.png");
         backgrounds[2] = new Texture("Starscape01.png");
@@ -48,10 +47,10 @@ public class GameScreen implements Screen {
         backgroundMaxScrollingSpeed = (float)(WORLD_HEIGHT) / 16;
         batch = new SpriteBatch();
         ship = new Ship();
+        Paths.init();
         ProjectileController.init();
         EnemyController.init();
-        EnemyController.generateWave(10);
-        Paths.init();
+        EnemyController.generateWave(8);
         counter = 0;
     }
 
@@ -61,8 +60,8 @@ public class GameScreen implements Screen {
         renderBackground(delta);
         ship.draw(batch, delta);
         ProjectileController.draw(batch, delta);
-        EnemyController.draw(batch, delta);
         EnemyController.spawnEnemies(delta);
+        EnemyController.draw(batch, delta);
         batch.end();
         Gdx.graphics.setTitle("MechanicTests | Score: " + score);
     }
@@ -107,6 +106,5 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
-        //backgrounds.dispose(); // Lembre-se de descartar a textura para evitar vazamento de memória.
     }
 }

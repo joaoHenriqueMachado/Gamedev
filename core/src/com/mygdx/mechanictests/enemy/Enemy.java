@@ -17,11 +17,15 @@ public class Enemy extends Sprite {
     public Vector2 currentPosition;
     private final Vector2 currentAngle;
 
-    private final Bezier<Vector2> path;
+    private Bezier<Vector2> path;
+
+    public void setPath(Bezier<Vector2> path) {
+        this.path = path;
+    }
 
     private int offsetX;
     private int offsetY;
-
+    public float speed;
 
     public void setCurrent(float current) {
         this.current = current;
@@ -52,11 +56,11 @@ public class Enemy extends Sprite {
         current = 0;
         offsetX = 0;
         offsetY = 0;
+        speed = 0.4f;
         this.path = path;
     }
 
     public void update(float delta) {
-        float speed = 0.35f;
         current += speed * delta;
 
         this.getBoundingRectangle().getPosition(currentPosition);
@@ -86,5 +90,13 @@ public class Enemy extends Sprite {
         boolean outsideYAxis = this.getY() < -this.getHeight();
         boolean outsideXAxis = this.getX() > GameScreen.WORLD_WIDTH || this.getX() < 0;
         return outsideYAxis || outsideXAxis;
+    }
+
+    public void increaseSpeed(int score){
+        if(score > 1000 && score < 2500){
+            speed = 0.45f;
+        }else if(score > 2500){
+            speed = 0.5f;
+        }
     }
 }
