@@ -63,7 +63,7 @@ public class GameScreen implements Screen {
         EnemyController.spawnEnemies(delta);
         EnemyController.draw(batch, delta);
         batch.end();
-        Gdx.graphics.setTitle("MechanicTests | Score: " + score);
+        Gdx.graphics.setTitle("MechanicTests | Score: " + score + " | Health: " + ship.getHealth());
     }
     private void renderBackground(float deltaTime){
         backgroundOffsets[0] = 0;

@@ -1,8 +1,6 @@
 package com.mygdx.mechanictests.enemy;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Bezier;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.mechanictests.GameScreen;
@@ -47,7 +45,7 @@ public class Enemy extends Sprite {
         this.offsetY = offsetY;
     }
 
-    public Enemy(String enemyType, Bezier<Vector2> path) {
+    public Enemy(Bezier<Vector2> path) {
         super(MechanicTests.shipTextureRegion[2][0]);
         this.flip(true, true);
         initialPosition = new Vector2();
@@ -82,6 +80,10 @@ public class Enemy extends Sprite {
             if(this.getBoundingRectangle().overlaps(p.getBoundingRectangle())){
                 return true;
             }
+        }
+        if(this.getBoundingRectangle().overlaps(GameScreen.ship.getBoundingRectangle())){
+            GameScreen.ship.detectHit(5);
+            return true;
         }
         return false;
     }

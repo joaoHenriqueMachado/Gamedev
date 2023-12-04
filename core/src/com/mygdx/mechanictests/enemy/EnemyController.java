@@ -108,7 +108,7 @@ public class EnemyController {
         if(!deadEnemies.isEmpty()){
             a = deadEnemies.remove();
         }else{
-            a = new Enemy("", path);
+            a = new Enemy(path);
         }
         a.setX(x);
         a.setY(y);

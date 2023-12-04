@@ -15,6 +15,12 @@ public class Ship extends Sprite {
     float accelerationY = 1000;
     float stopFriction = 0.9f;
 
+    int health = 100;
+
+    public int getHealth() {
+        return health;
+    }
+
     public Ship() {
         super(MechanicTests.manager.<Texture>get("spaceship.png"));
         shipInputProcessor = new ShipInputProcessor();
@@ -72,5 +78,13 @@ public class Ship extends Sprite {
         }else{
             velocityX = 0;
         }
+    }
+
+    public void detectHit(int healthDecrease){
+        if(health <= healthDecrease){
+            health = 0;
+            return;
+        }
+        health -= healthDecrease;
     }
 }
