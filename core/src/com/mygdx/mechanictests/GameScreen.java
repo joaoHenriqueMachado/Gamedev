@@ -3,15 +3,21 @@ package com.mygdx.mechanictests;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.mechanictests.enemy.EnemyController;
 import com.mygdx.mechanictests.paths.Paths;
 import com.mygdx.mechanictests.projectile.ProjectileController;
 import com.mygdx.mechanictests.ship.Ship;
+
+import java.util.Locale;
 
 public class GameScreen implements Screen {
     // screen
@@ -33,6 +39,10 @@ public class GameScreen implements Screen {
 
     public static int score;
 
+    //Heads-Up Display
+    BitmapFont font;
+    float hudVerticalMargin, hudLeftX, hudRightX, hudCentreX, hudRow1Y, hudRow2Y, hudSectionWidth;
+
     public static int counter;
     public GameScreen() {
         camera = new OrthographicCamera();
@@ -52,6 +62,7 @@ public class GameScreen implements Screen {
         EnemyController.init();
         EnemyController.generateWave(8);
         counter = 0;
+        prepareHUD();
     }
 
     @Override
@@ -62,8 +73,9 @@ public class GameScreen implements Screen {
         ProjectileController.draw(batch, delta);
         EnemyController.spawnEnemies(delta);
         EnemyController.draw(batch, delta);
+        updateAndRenderHUD();
         batch.end();
-        Gdx.graphics.setTitle("MechanicTests | Score: " + score + " | Health: " + ship.getHealth());
+        //Gdx.graphics.setTitle("MechanicTests | Score: " + score + " | Health: " + ship.getHealth());
     }
     private void renderBackground(float deltaTime){
         backgroundOffsets[0] = 0;
@@ -80,6 +92,42 @@ public class GameScreen implements Screen {
             batch.draw(backgrounds[layer], 0, -backgroundOffsets[layer]+WORLD_HEIGHT, WORLD_WIDTH,WORLD_HEIGHT);
         }
     }
+
+    private void prepareHUD() {
+        //Create a BitmapFont from our font file
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("EdgeOfTheGalaxyRegular-OVEa6.otf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
+        fontParameter.size = 942;
+        fontParameter.borderWidth = 6.5f;
+        fontParameter.color = new Color(1, 1, 1, 0.3f);
+        fontParameter.borderColor = new Color(0, 0, 0, 0.3f);
+
+        font = fontGenerator.generateFont(fontParameter);
+
+        //scale the font to fit world
+        font.getData().setScale(0.08f);
+
+        //calculate hud margins, etc.
+        hudVerticalMargin = font.getCapHeight() / 2;
+        hudLeftX = hudVerticalMargin;
+        hudRightX = WORLD_WIDTH * 2 / 3 - hudLeftX;
+        hudCentreX = WORLD_WIDTH / 3;
+        hudRow1Y = WORLD_HEIGHT - hudVerticalMargin;
+        hudRow2Y = hudRow1Y - hudVerticalMargin - font.getCapHeight();
+        hudSectionWidth = WORLD_WIDTH / 3;
+    }
+    private void updateAndRenderHUD() {
+        //render top row labels
+        font.draw(batch, "Score", hudLeftX, hudRow1Y, hudSectionWidth, Align.left, false);
+
+        font.draw(batch, "Lives", hudRightX, hudRow1Y, hudSectionWidth, Align.right, false);
+        //render second row values
+        font.draw(batch, String.format(Locale.getDefault(), "%06d", score), hudLeftX, hudRow2Y, hudSectionWidth, Align.left, false);
+        //font.draw(batch, String.format(Locale.getDefault(), "%02d", playerShip.shield), hudCentreX, hudRow2Y, hudSectionWidth, Align.center, false);
+        font.draw(batch, String.format(Locale.getDefault(), "%02d", ship.getHealth()), hudRightX, hudRow2Y, hudSectionWidth, Align.right, false);
+    }
+
 
     @Override
     public void resize(int width, int height) {
