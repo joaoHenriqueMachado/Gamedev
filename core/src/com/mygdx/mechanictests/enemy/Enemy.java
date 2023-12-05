@@ -70,10 +70,6 @@ public class Enemy extends Sprite {
         this.setRotation(currentAngle.angleDeg() + 90);
     }
 
-    public Rectangle getBoundingBox() {
-       return this.getBoundingRectangle();
-    }
-
     public boolean detectHit(){
         for(Projectile p: ProjectileController.getAliveProjectiles()){
             if(this.getBoundingRectangle().overlaps(p.getBoundingRectangle())){

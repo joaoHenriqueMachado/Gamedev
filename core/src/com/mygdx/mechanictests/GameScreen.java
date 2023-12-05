@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.mechanictests.enemy.EnemyController;
+import com.mygdx.mechanictests.explosion.ExplosionController;
 import com.mygdx.mechanictests.paths.Paths;
 import com.mygdx.mechanictests.projectile.ProjectileController;
 import com.mygdx.mechanictests.ship.Ship;
@@ -61,6 +62,7 @@ public class GameScreen implements Screen {
         ProjectileController.init();
         EnemyController.init();
         EnemyController.generateWave(8);
+        ExplosionController.init();
         counter = 0;
         prepareHUD();
     }
@@ -73,6 +75,7 @@ public class GameScreen implements Screen {
         ProjectileController.draw(batch, delta);
         EnemyController.spawnEnemies(delta);
         EnemyController.draw(batch, delta);
+        ExplosionController.draw(batch, delta);
         updateAndRenderHUD();
         batch.end();
         //Gdx.graphics.setTitle("MechanicTests | Score: " + score + " | Health: " + ship.getHealth());
