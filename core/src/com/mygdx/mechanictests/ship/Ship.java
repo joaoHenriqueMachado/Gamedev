@@ -1,5 +1,6 @@
 package com.mygdx.mechanictests.ship;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -36,6 +37,9 @@ public class Ship extends Sprite {
     public void update(float delta) {
         updateShipVelocity(delta);
         updateShipPosition(delta);
+        if(health <= 0){
+            Gdx.app.exit();
+        }
     }
 
     private void updateShipVelocity(float delta){

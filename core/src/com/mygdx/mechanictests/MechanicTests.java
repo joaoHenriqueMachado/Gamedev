@@ -36,7 +36,7 @@ public class MechanicTests extends Game {
 		manager.load("spaceship_right.png", Texture.class);
 		manager.load("projectile.png", Texture.class);
 		manager.load("laser_sprites/02.png", Texture.class);
-		manager.load("laser_sprites/57.png", Texture.class);
+		manager.load("laser_sprites/11.png", Texture.class);
 		manager.load("laser_ball.png", Texture.class);
 		manager.load("sounds/wavetable.mp3", Music.class);
 		manager.load("sounds/laser_gun.mp3", Sound.class);

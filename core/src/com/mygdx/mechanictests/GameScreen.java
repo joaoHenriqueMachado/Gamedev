@@ -98,7 +98,7 @@ public class GameScreen implements Screen {
 
     private void prepareHUD() {
         //Create a BitmapFont from our font file
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("EdgeOfTheGalaxyRegular-OVEa6.otf"));
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("SpaceMono-Regular.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
         fontParameter.size = 942;
@@ -124,7 +124,7 @@ public class GameScreen implements Screen {
         //render top row labels
         font.draw(batch, "Score", hudLeftX, hudRow1Y, hudSectionWidth, Align.left, false);
 
-        font.draw(batch, "Lives", hudRightX, hudRow1Y, hudSectionWidth, Align.right, false);
+        font.draw(batch, "HealtH", hudRightX, hudRow1Y, hudSectionWidth, Align.right, false);
         //render second row values
         font.draw(batch, String.format(Locale.getDefault(), "%06d", score), hudLeftX, hudRow2Y, hudSectionWidth, Align.left, false);
         //font.draw(batch, String.format(Locale.getDefault(), "%02d", playerShip.shield), hudCentreX, hudRow2Y, hudSectionWidth, Align.center, false);

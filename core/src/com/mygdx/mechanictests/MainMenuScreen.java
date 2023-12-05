@@ -89,9 +89,6 @@ public class MainMenuScreen implements Screen {
         float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
 
-        float scaleX = screenWidth / backgroundTexture.getWidth();
-        float scaleY = screenHeight / backgroundTexture.getHeight();
-
         batch.draw(backgroundTexture, 0, 0, screenWidth, screenHeight);
 
         batch.end();
