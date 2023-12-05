@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class MechanicTests extends Game {
-	GameScreen gameScreen;
+
+
+	MainMenuScreen menuScreen;
 	public static AssetManager manager;
 	public static InputMultiplexer multiplexer;
 	public static Music defaultMusic;
@@ -48,9 +50,8 @@ public class MechanicTests extends Game {
 		defaultMusic.play();
 
 		Gdx.graphics.setWindowedMode(1600, 900);
-
-		gameScreen = new GameScreen();
-		setScreen(gameScreen);
+		menuScreen = new MainMenuScreen();
+		setScreen(menuScreen);
 
 		Texture tex = manager.get("ships.png");
 		shipTextureRegion = TextureRegion.split(tex, 256, 256);

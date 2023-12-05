@@ -1,13 +1,17 @@
 package com.mygdx.mechanictests.enemy;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Bezier;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.mechanictests.Explosion;
 import com.mygdx.mechanictests.GameScreen;
 import com.mygdx.mechanictests.MechanicTests;
 import com.mygdx.mechanictests.paths.Paths;
 
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -16,6 +20,8 @@ public class EnemyController {
     private static ConcurrentLinkedQueue<Enemy> deadEnemies;
 
     private static Sound explosionSound;
+
+    private static Texture explosionTexture;
 
     private static float waveCounter;
     private static int waveEnemyCount;
@@ -27,6 +33,8 @@ public class EnemyController {
 
     private static Bezier<Vector2> path;
     private static Random random;
+
+    private static LinkedList<Explosion> explosionList;
 
     private static int offsetX;
     private static int offsetY;
@@ -100,7 +108,7 @@ public class EnemyController {
         waveCounter = 0;
         spawnTime = 0.15f;
         explosionSound = MechanicTests.manager.get("sounds/explosion_sound.wav");
-
+        explosionTexture = new Texture("explosion.png");
     }
 
     public static void set(float x, float y, Bezier<Vector2> path){
@@ -141,6 +149,10 @@ public class EnemyController {
         aliveEnemies.remove(e);
         deadEnemies.add(e);
         long id = explosionSound.play();
+        explosionList.add(
+                new Explosion(explosionTexture,
+                        new Rectangle(e.getBoundingBox()),
+                        0.7f));
         explosionSound.setVolume(id, 0.1f);
     }
 }

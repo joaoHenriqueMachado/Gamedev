@@ -2,6 +2,7 @@ package com.mygdx.mechanictests.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Bezier;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.mechanictests.GameScreen;
 import com.mygdx.mechanictests.MechanicTests;
@@ -67,6 +68,10 @@ public class Enemy extends Sprite {
         this.setX(currentPosition.x + offsetX);
         this.setY(currentPosition.y + offsetY);
         this.setRotation(currentAngle.angleDeg() + 90);
+    }
+
+    public Rectangle getBoundingBox() {
+       return this.getBoundingRectangle();
     }
 
     public boolean detectHit(){
