@@ -2,7 +2,6 @@ package com.mygdx.mechanictests.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Bezier;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.mechanictests.GameScreen;
 import com.mygdx.mechanictests.MechanicTests;
@@ -91,7 +90,7 @@ public class Enemy extends Sprite {
 
     public boolean isOutOfScreen(){
         boolean outsideYAxis = this.getY() < -this.getHeight();
-        boolean outsideXAxis = this.getX() > GameScreen.WORLD_WIDTH || this.getX() < 0;
+        boolean outsideXAxis = this.getX() > GameScreen.WORLD_WIDTH || this.getX() < -this.getWidth();
         return outsideYAxis || outsideXAxis;
     }
 
