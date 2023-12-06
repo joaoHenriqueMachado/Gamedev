@@ -1,7 +1,6 @@
 package com.mygdx.mechanictests.enemy;
 
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Bezier;
 import com.badlogic.gdx.math.Vector2;
@@ -102,20 +101,21 @@ public class EnemyController {
     }
 
     public static void set(float x, float y, Bezier<Vector2> path){
-        Enemy a;
+        Enemy e;
         if(!deadEnemies.isEmpty()){
-            a = deadEnemies.remove();
+            e = deadEnemies.remove();
         }else{
-            a = new Enemy(path);
+            e = new Enemy(path);
         }
-        a.setX(x);
-        a.setY(y);
-        a.setCurrent(0);
-        a.setInitialPosition(x,y);
-        a.setPath(path);
-        a.setOffsetX(offsetX);
-        a.setOffsetY(offsetY);
-        aliveEnemies.add(a);
+        e.setX(x);
+        e.setY(y);
+        e.setCurrent(0);
+        e.setInitialPosition(x,y);
+        e.setPath(path);
+        e.setOffsetX(offsetX);
+        e.setOffsetY(offsetY);
+        e.increaseSpeed(GameScreen.score);
+        aliveEnemies.add(e);
     }
 
     public static void draw(SpriteBatch batch, float delta){
@@ -135,7 +135,6 @@ public class EnemyController {
 
     private static void enemyHit(Enemy e){
         GameScreen.score += 10;
-        e.increaseSpeed(GameScreen.score);
         aliveEnemies.remove(e);
         deadEnemies.add(e);
         long id = explosionSound.play();

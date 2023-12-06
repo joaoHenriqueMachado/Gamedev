@@ -21,15 +21,10 @@ import com.mygdx.mechanictests.ship.Ship;
 import java.util.Locale;
 
 public class GameScreen implements Screen {
-    // screen
     final private Camera camera;
     final private Viewport viewport;
-
-    // graphics
     final private SpriteBatch batch;
     final private Texture[] backgrounds;
-
-    // timing
     final private float[] backgroundOffsets = {0,0,0,0};
     final private float backgroundMaxScrollingSpeed;
 
@@ -39,12 +34,11 @@ public class GameScreen implements Screen {
     public static Ship ship;
 
     public static int score;
-
-    //Heads-Up Display
     BitmapFont font;
     float hudVerticalMargin, hudLeftX, hudRightX, hudCentreX, hudRow1Y, hudRow2Y, hudSectionWidth;
 
-    public static int counter;
+    public static float startTimer;
+
     public GameScreen() {
         camera = new OrthographicCamera();
         viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
@@ -58,27 +52,25 @@ public class GameScreen implements Screen {
         backgroundMaxScrollingSpeed = (float)(WORLD_HEIGHT) / 16;
         batch = new SpriteBatch();
         ship = new Ship();
-        Paths.init();
-        ProjectileController.init();
-        EnemyController.init();
-        EnemyController.generateWave(8);
-        ExplosionController.init();
-        counter = 0;
-        prepareHUD();
+        startTimer = 0.0f;
     }
 
     @Override
     public void render(float delta) {
+        startTimer += delta;
         batch.begin();
         renderBackground(delta);
         ship.draw(batch, delta);
-        ProjectileController.draw(batch, delta);
-        EnemyController.spawnEnemies(delta);
-        EnemyController.draw(batch, delta);
-        ExplosionController.draw(batch, delta);
+
+        if(startTimer >= 2.0f){
+            ProjectileController.draw(batch, delta);
+            EnemyController.spawnEnemies(delta);
+            EnemyController.draw(batch, delta);
+            ExplosionController.draw(batch, delta);
+        }
+
         updateAndRenderHUD();
         batch.end();
-        //Gdx.graphics.setTitle("MechanicTests | Score: " + score + " | Health: " + ship.getHealth());
     }
     private void renderBackground(float deltaTime){
         backgroundOffsets[0] = 0;
@@ -114,17 +106,17 @@ public class GameScreen implements Screen {
         //calculate hud margins, etc.
         hudVerticalMargin = font.getCapHeight() / 2;
         hudLeftX = hudVerticalMargin;
-        hudRightX = WORLD_WIDTH * 2 / 3 - hudLeftX;
-        hudCentreX = WORLD_WIDTH / 3;
+        hudRightX = WORLD_WIDTH * 2.0f / 3 - hudLeftX;
+        hudCentreX = WORLD_WIDTH / 3.0f;
         hudRow1Y = WORLD_HEIGHT - hudVerticalMargin;
         hudRow2Y = hudRow1Y - hudVerticalMargin - font.getCapHeight();
-        hudSectionWidth = WORLD_WIDTH / 3;
+        hudSectionWidth = WORLD_WIDTH / 3.0f;
     }
     private void updateAndRenderHUD() {
         //render top row labels
         font.draw(batch, "Score", hudLeftX, hudRow1Y, hudSectionWidth, Align.left, false);
 
-        font.draw(batch, "HealtH", hudRightX, hudRow1Y, hudSectionWidth, Align.right, false);
+        font.draw(batch, "Health", hudRightX, hudRow1Y, hudSectionWidth, Align.right, false);
         //render second row values
         font.draw(batch, String.format(Locale.getDefault(), "%06d", score), hudLeftX, hudRow2Y, hudSectionWidth, Align.left, false);
         //font.draw(batch, String.format(Locale.getDefault(), "%02d", playerShip.shield), hudCentreX, hudRow2Y, hudSectionWidth, Align.center, false);
@@ -152,6 +144,12 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
+        Paths.init();
+        ProjectileController.init();
+        EnemyController.init();
+        EnemyController.generateWave(8);
+        ExplosionController.init();
+        prepareHUD();
     }
 
     @Override

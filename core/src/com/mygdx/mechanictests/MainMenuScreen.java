@@ -18,10 +18,8 @@ public class MainMenuScreen implements Screen {
 
     private final Stage stage;
     private final Sound buttonHoverSound;
-    private SpriteBatch batch;
-    private float originalWidth;
-    private float originalHeight;
-    private Texture backgroundTexture;
+    private final SpriteBatch batch;
+    private final Texture backgroundTexture;
     public MainMenuScreen() {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -34,8 +32,6 @@ public class MainMenuScreen implements Screen {
         TextureRegionDrawable buttonStartImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("StartButton.png")));
         TextureRegionDrawable buttonQuitImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("QuitButton.png")));
         backgroundTexture = new Texture("BackgroundMenu.png");
-        originalWidth = backgroundTexture.getWidth();
-        originalHeight = backgroundTexture.getHeight();
         ImageButton startButton = new ImageButton(buttonStartImage);
         ImageButton exitButton = new ImageButton(buttonQuitImage);
 
@@ -46,16 +42,13 @@ public class MainMenuScreen implements Screen {
             }
 
             @Override
-            public void clicked(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y) {
-                Gdx.app.log("Button", "Start Button click");
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen());
+            public void clicked(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y) {((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen());
             }
         });
 
         exitButton.addListener(new ClickListener() {
             @Override
             public void enter(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, com.badlogic.gdx.scenes.scene2d.Actor fromActor) {
-                Gdx.app.log("Button", "Start Button Entered");
                 buttonHoverSound.play();
             }
 
