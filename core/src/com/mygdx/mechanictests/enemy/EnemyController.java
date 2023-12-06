@@ -6,8 +6,8 @@ import com.badlogic.gdx.math.Bezier;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.mechanictests.GameScreen;
 import com.mygdx.mechanictests.MechanicTests;
+import com.mygdx.mechanictests.explosion.ExplosionController;
 import com.mygdx.mechanictests.paths.Paths;
-
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -16,7 +16,6 @@ public class EnemyController {
     private static ConcurrentLinkedQueue<Enemy> deadEnemies;
 
     private static Sound explosionSound;
-
     private static float waveCounter;
     private static int waveEnemyCount;
 
@@ -27,7 +26,6 @@ public class EnemyController {
 
     private static Bezier<Vector2> path;
     private static Random random;
-
     private static int offsetX;
     private static int offsetY;
 
@@ -100,24 +98,24 @@ public class EnemyController {
         waveCounter = 0;
         spawnTime = 0.15f;
         explosionSound = MechanicTests.manager.get("sounds/explosion_sound.wav");
-
     }
 
     public static void set(float x, float y, Bezier<Vector2> path){
-        Enemy a;
+        Enemy e;
         if(!deadEnemies.isEmpty()){
-            a = deadEnemies.remove();
+            e = deadEnemies.remove();
         }else{
-            a = new Enemy(path);
+            e = new Enemy(path);
         }
-        a.setX(x);
-        a.setY(y);
-        a.setCurrent(0);
-        a.setInitialPosition(x,y);
-        a.setPath(path);
-        a.setOffsetX(offsetX);
-        a.setOffsetY(offsetY);
-        aliveEnemies.add(a);
+        e.setX(x);
+        e.setY(y);
+        e.setCurrent(0);
+        e.setInitialPosition(x,y);
+        e.setPath(path);
+        e.setOffsetX(offsetX);
+        e.setOffsetY(offsetY);
+        e.increaseSpeed(GameScreen.score);
+        aliveEnemies.add(e);
     }
 
     public static void draw(SpriteBatch batch, float delta){
@@ -137,10 +135,10 @@ public class EnemyController {
 
     private static void enemyHit(Enemy e){
         GameScreen.score += 10;
-        e.increaseSpeed(GameScreen.score);
         aliveEnemies.remove(e);
         deadEnemies.add(e);
         long id = explosionSound.play();
         explosionSound.setVolume(id, 0.1f);
+        ExplosionController.set(e.getX(), e.getY(), e.getBoundingRectangle());
     }
 }

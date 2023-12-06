@@ -31,7 +31,7 @@ public abstract class Paths {
         yLine = new Bezier<>(path3Points);
 
         Vector2[] path4Points = new Vector2[2];
-        path4Points[0] = new Vector2(0, (float)GameScreen.WORLD_HEIGHT / 2);
+        path4Points[0] = new Vector2(-256, (float)GameScreen.WORLD_HEIGHT / 2);
         path4Points[1] = new Vector2(GameScreen.WORLD_WIDTH, (float)GameScreen.WORLD_HEIGHT / 2);
         xLine = new Bezier<>(path4Points);
 

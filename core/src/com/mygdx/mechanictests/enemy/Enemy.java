@@ -90,7 +90,7 @@ public class Enemy extends Sprite {
 
     public boolean isOutOfScreen(){
         boolean outsideYAxis = this.getY() < -this.getHeight();
-        boolean outsideXAxis = this.getX() > GameScreen.WORLD_WIDTH || this.getX() < 0;
+        boolean outsideXAxis = this.getX() > GameScreen.WORLD_WIDTH || this.getX() < -this.getWidth();
         return outsideYAxis || outsideXAxis;
     }
 

@@ -47,7 +47,7 @@ public abstract class ProjectileController {
             if (!secondaryDeadProjectiles.isEmpty()){
                 a = secondaryDeadProjectiles.remove();
             }else{
-                a = new Projectile("laser_sprites/57.png");
+                a = new Projectile("laser_sprites/11.png");
             }
             secondaryAliveProjectiles.add(a);
             long id = laser_shot.play();
