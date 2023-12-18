@@ -1,5 +1,6 @@
 package com.mygdx.mechanictests;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
@@ -40,6 +41,7 @@ public class GameScreen implements Screen {
     public static float startTimer;
 
     public GameScreen() {
+        score = 0;
         camera = new OrthographicCamera();
         viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         backgrounds = new Texture[4];
@@ -68,7 +70,9 @@ public class GameScreen implements Screen {
             EnemyController.draw(batch, delta);
             ExplosionController.draw(batch, delta);
         }
-
+        if(ship.getHealth() <= 0){
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(score));
+        }
         updateAndRenderHUD();
         batch.end();
     }
