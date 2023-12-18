@@ -11,6 +11,7 @@ public class MechanicTests extends Game {
 
 
 	MainMenuScreen menuScreen;
+
 	public static AssetManager manager;
 	public static InputMultiplexer multiplexer;
 	public static Music defaultMusic;
